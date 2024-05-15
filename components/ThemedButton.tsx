@@ -55,8 +55,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     variantText: {
-        fontSize: 20,
-        fontWeight: 'bold',
     },
     disabled: {
         opacity: 0.5,

@@ -34,10 +34,15 @@ export default function ChatScreen() {
         client.current = new Client({
             webSocketFactory: () => socket,
             debug: (str) => console.log(str),
+            onWebSocketClose: () => {
+                setIsConnected(false);
+                client.current?.deactivate()
+                setMessages([]);
+            },
             onConnect: () => {
                 setIsConnected(true);
                 client.current?.subscribe('/test/topic/greetings', (message: IMessage) => {
-                    setMessages((prevMessages) => [...prevMessages, message.body]);
+                    setMessages((prevMessages) => [...prevMessages, JSON.parse(message.body).content]);
                 });
             },
             onDisconnect: () => {
@@ -79,7 +84,7 @@ export default function ChatScreen() {
                         value={inputText}
                         onChangeText={setInputText}
                     />
-                    <ThemedButton variant='contained' onPress={sendMessage}>Send Message</ThemedButton>
+                    <ThemedButton disabled={inputText.trim().length === 0} variant='contained' onPress={sendMessage}>Send Message</ThemedButton>
                 </>
             )}
             <FlatList
