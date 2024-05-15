@@ -18,6 +18,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
+
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
@@ -32,6 +33,16 @@ export default function TabLayout() {
           ),
         }}
       />
+        <Tabs.Screen
+            name="chat"
+            options={{
+                headerShown: true,
+                title: 'Chat',
+                tabBarIcon: ({ color, focused }) => (
+                    <TabBarIcon name={focused ? 'chatbox' : 'chatbox-outline'} color={color}/>
+                ),
+            }}
+        />
     </Tabs>
   );
 }
