@@ -1,0 +1,9 @@
+{
+  "welcome": "Welcome",
+  "chat": {
+    "title": "Chat",
+    "connected": "Connected",
+    "notConnected": "Connect to Server",
+    "send": "Send Message"
+  }
+}

@@ -9,6 +9,7 @@ import {Client, IMessage} from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import {ThemedButton} from "@/components/ThemedButton";
 import {useThemeColor} from "@/hooks/useThemeColor";
+import {useTranslation} from "@/hooks/useTranslation";
 
 const WEBSOCKET_URL = 'http://192.168.178.20:8080/koble'; // Replace with your WebSocket URL
 
@@ -20,6 +21,7 @@ export default function ChatScreen() {
     const themeTextColor = useThemeColor({}, 'text');
     const themePlaceholderColor = useThemeColor({}, 'textPlaceholderText');
     const tintColor = useThemeColor({}, 'tint');
+    const {t} = useTranslation();
 
     useEffect(() => {
         return () => {
@@ -70,10 +72,10 @@ export default function ChatScreen() {
             headerBackgroundColor={{light: '#D0D0D0', dark: '#113636'}}
             headerImage={<Ionicons size={200} name="chatbox" style={[styles.headerImage, {color: tintColor}]}/>}>
             <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Chat</ThemedText>
+                <ThemedText type="title">{t('chat.title')}</ThemedText>
             </ThemedView>
             <ThemedButton onPress={connectWebSocket} disabled={isConnected}
-                          variant={'outlined'}>{isConnected ? 'Connected' : 'Connect to WebSocket'}</ThemedButton>
+                          variant={'outlined'}>{isConnected ? t('chat.connected') : t('chat.notConnected')}</ThemedButton>
             {isConnected && (
                 <>
                     <TextInput
@@ -84,7 +86,7 @@ export default function ChatScreen() {
                         value={inputText}
                         onChangeText={setInputText}
                     />
-                    <ThemedButton disabled={inputText.trim().length === 0} variant='contained' onPress={sendMessage}>Send Message</ThemedButton>
+                    <ThemedButton disabled={inputText.trim().length === 0} variant='contained' onPress={sendMessage}>{t('chat.send')}</ThemedButton>
                 </>
             )}
             <FlatList

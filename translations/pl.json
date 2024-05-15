@@ -1,0 +1,9 @@
+{
+  "welcome": "Siemano",
+  "chat": {
+    "title": "Chatus",
+    "connected": "Połączony",
+    "notConnected": "Połącz z serwerem",
+    "send": "Wyślij wiadomość"
+  }
+}
